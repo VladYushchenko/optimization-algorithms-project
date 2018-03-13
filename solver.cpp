@@ -1,4 +1,5 @@
 #include "solver.h"
+#include <numeric>
 
 template<typename T>
 iSolver<T>* iSolver<T>::makeSolver(int choice)

@@ -47,7 +47,7 @@ void Generator::generateData(){
 }
 
 
-void Generator::generateData2(size_t boxLength){
+void Generator::generateData2(unsigned int boxLength){
     std::vector<Rectangle> tempData = std::vector<Rectangle>(1, Rectangle(0, boxLength, boxLength));
     std::random_device rd;
     // seed generator
@@ -61,7 +61,7 @@ void Generator::generateData2(size_t boxLength){
 
         Rectangle tempRectangle = tempData[rectangleNumber];
         // create weights for choosing side of rectangle
-        std::vector<size_t> weights = tempRectangle.getSideLengths();
+        std::vector<unsigned int> weights = tempRectangle.getSideLengths();
         // normalize weights
         //weights /= std::accumulate(v.begin(), v.end(), 0);
             /*for (auto i = 0; i < tempData[rectangleNumber].getDimension(); i++) {

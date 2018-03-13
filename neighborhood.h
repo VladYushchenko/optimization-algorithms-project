@@ -32,7 +32,6 @@ class Rectangle{
         bool contains(const Rectangle & rectangle);
         void moveToPosition(int x, int y);
 
-
 };
 
 class Box{

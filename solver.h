@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <list>
+#include <random>
 #include "neighborhood.h"
 
 template <typename T>
