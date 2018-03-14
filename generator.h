@@ -21,7 +21,7 @@ public:
 		const unsigned int lowerLengthLimit, const unsigned int upperLengthLimit, const unsigned int dim = 2);
     ~Generator();
 
-	void generateData(int option = 1);
+	void generateData(int option = 0);
 	void generateRectangles();
     void generateRectanglesFromBox();
     std::vector<Rectangle> getGeneratedData();

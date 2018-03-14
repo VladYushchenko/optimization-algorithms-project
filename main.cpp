@@ -14,23 +14,23 @@ int main(int argc, char *argv[])
             std::cout << argv[i] << std::endl;
         }
     if (argc == 6){
-        size_t instanceCount = atoi(argv[1]);
-        size_t rectangleCount = atoi(argv[2]);
-        size_t minSideLength = atoi(argv[3]);
-        size_t maxSideLength = atoi(argv[4]);
-        size_t boxLength = atoi(argv[5]);
-
+        auto instanceCount = atoi(argv[1]);
+		auto rectangleCount = atoi(argv[2]);
+		auto minSideLength = atoi(argv[3]);
+		auto maxSideLength = atoi(argv[4]);
+		auto boxLength = atoi(argv[5]);
+		auto genType = 0;
 
         std::clock_t c_start;
         std::clock_t c_end;
 
-        for (size_t i = 0; i < instanceCount; i++){
+        for (auto i = 0; i < instanceCount; i++){
             for (int j = 0; j < 3; j++)
             {
 
                 c_start = std::clock();
 
-                OptimizationProblem problem(rectangleCount, boxLength, minSideLength, maxSideLength);
+                OptimizationProblem problem(rectangleCount, boxLength, minSideLength, maxSideLength, genType);
                 problem.solveOptimizationProblem(j);
                 std::cout << "Solved with #boxes: " << problem.getStartSolution().size() << std::endl;
 

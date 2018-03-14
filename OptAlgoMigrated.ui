@@ -210,7 +210,6 @@ p, li { white-space: pre-wrap; }
   </layout>
   <zorder>graphicsView</zorder>
   <zorder>logger</zorder>
-  <zorder>comboBox_2</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

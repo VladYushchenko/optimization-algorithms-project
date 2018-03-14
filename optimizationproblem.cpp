@@ -4,7 +4,8 @@ OptimizationProblem::OptimizationProblem()
 {
 }
 
-OptimizationProblem::OptimizationProblem(unsigned int rectangleCount, unsigned int boxLength, unsigned int minSideLength, unsigned int maxSideLength)
+OptimizationProblem::OptimizationProblem(unsigned int rectangleCount, unsigned int boxLength, 
+	unsigned int minSideLength, unsigned int maxSideLength, int generatorType)
 {
     _rectangleCount = rectangleCount;
     _boxLength = boxLength;
@@ -12,7 +13,7 @@ OptimizationProblem::OptimizationProblem(unsigned int rectangleCount, unsigned i
     _maxSideLength = maxSideLength;
 
     Generator gen(_rectangleCount, _boxLength, _minSideLength, _maxSideLength);
-    gen.generateData();
+    gen.generateData(generatorType);
     std::vector<Rectangle> rects = gen.getGeneratedData();
 
     for (size_t i = 0; i < rects.size(); i++)

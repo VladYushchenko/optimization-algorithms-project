@@ -9,6 +9,7 @@
 
 class Rectangle{
     private:
+		void updateArea();
 
     public:
         size_t id;

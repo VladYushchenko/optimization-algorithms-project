@@ -140,6 +140,7 @@ std::list<T> SimulatedAnnealingSolver<T>::solve(){
     const int NO_IMPROVEMENT_COUNT = 25;
     bool isOptimumFound = false;
     T currentSolution = _solution;
+	T nextSolution;
 
     std::list<T> solutionHistory;
     solutionHistory.push_back(currentSolution);
@@ -149,8 +150,15 @@ std::list<T> SimulatedAnnealingSolver<T>::solve(){
     {
         currentNeighborhood.update(currentSolution, optionCase);
         std::vector<T> currentNeighbors = currentNeighborhood.getNeighbors();
-
-        T nextSolution = chooseRandomNeighbor(currentNeighbors);
+		
+		if (!currentNeighbors.empty()) 
+		{
+			nextSolution = chooseRandomNeighbor(currentNeighbors);
+		}
+		else
+		{
+			return solutionHistory;
+		}
 
         double currentTargetFunction = targetFunction(currentSolution);
         double nextTargetFunction = targetFunction(nextSolution);
@@ -226,6 +234,10 @@ std::list<T> TabuSearchSolver<T>::solve(){
         currentNeighborhood.update(currentSolution, optionCase);
         std::vector<T> currentNeighbors = currentNeighborhood.getNeighbors();
 
+		if (currentNeighbors.empty())
+			return solutionHistory;	
+
+		// find will work?
         for (auto it = currentNeighbors.begin(); it != currentNeighbors.end(); it++){
             if ((std::find(tabuList.begin(),tabuList.end(),*it) == tabuList.end())
                     && (targetFunction(currentSolution) < targetFunction(*it)))

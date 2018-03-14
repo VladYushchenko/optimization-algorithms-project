@@ -12,7 +12,7 @@ Rectangle::Rectangle(size_t id, unsigned int width, unsigned int height){
     this->y = 0;
     this->width = width;
     this->height = height;
-    this->area = width*height;
+	updateArea();
 
 }
 
@@ -28,6 +28,11 @@ Rectangle::Rectangle(const Rectangle& obj){
 
 Rectangle::~Rectangle(){
 
+}
+
+void Rectangle::updateArea()
+{
+	this->area = this->width * this->height;
 }
 
 void Rectangle::rotate()
@@ -61,6 +66,7 @@ void Rectangle::modifySideLength(const int position, const unsigned int value){
         width = value;
     else
         height = value;
+	updateArea();
 }
 
 void Rectangle::modifyStartPoint(const int position, const unsigned int value){
@@ -417,14 +423,3 @@ void Neighborhood<T>::calculateRuleBasedNeighbors(T currentSolution){
 
 
 template class Neighborhood<std::vector<Box>>;
-
-
-
-
-
-
-
-
-
-
-

@@ -45,7 +45,7 @@ void Widget::generateData()
 	ui->logger->insertPlainText(QString::fromStdString(stream.str()));
 	ui->logger->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
 
-    problem = new OptimizationProblem(rectCount, boxLength, minRectLength, maxRectLength);
+    problem = new OptimizationProblem(rectCount, boxLength, minRectLength, maxRectLength, generatorTypeIndex);
 
     ui->logger->insertPlainText("Instance Generated\n\n");
 	ui->logger->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
@@ -77,7 +77,7 @@ void Widget::solveAndDraw()
     solutionInfo = problem->getSolutionHistory();
 
 	auto solutionMessage = "Program terminated in " + std::to_string(solutionInfo.size() - 1) + " steps.\n";
-	solutionMessage += "Solution is " + std::to_string(solutionInfo.back().size()) + " boxes\n\n";
+	solutionMessage += "Solution: " + std::to_string(solutionInfo.back().size()) + " boxes\n\n";
 	ui->logger->insertPlainText(QString::fromStdString(solutionMessage));
 	ui->logger->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
 

@@ -1,9 +1,9 @@
 #include "generator.h"
-#include <map>
+#include <unordered_map>
 #include <algorithm>
 
 
-// Generator implementation
+/// Generator implementation
 
 Generator::Generator(){
     _instanceNumber = 0;
@@ -37,10 +37,10 @@ void Generator::generateData(int option)
 {
 	switch (option)
 	{
-	case 1:
+	case 0:
 		generateRectangles();
 		break;
-	case 2:
+	case 1:
 		generateRectanglesFromBox();
 		break;
 	default:
@@ -65,18 +65,22 @@ void Generator::generateRectangles()
 
 
 void Generator::generateRectanglesFromBox(){
-	std::map<unsigned int, Rectangle> tempData = { { 1u, Rectangle(0, _boxLength, _boxLength) } };
-	unsigned int maxKey = 1;
+	std::unordered_map<unsigned int, Rectangle> tempData = { { 0u, Rectangle(0, _boxLength, _boxLength) } };
+	unsigned int maxKey = 0;
 	// seed generator
     std::random_device rd;
     std::mt19937 rng(rd());
 
-    for (size_t i = 0; i < _instanceNumber; i++){
+    for (size_t i = 0; i < _instanceNumber; i++)
+	{	
+		std::vector<unsigned int> map_keys;
+		for (auto const & item : tempData)
+			map_keys.push_back(item.first);
         // choose number of rectangle to perform split
-        std::uniform_int_distribution<unsigned int> uniform(0, tempData.size() - 1);
+        std::uniform_int_distribution<unsigned int> uniform(0, map_keys.size() - 1);
+        auto map_key_index = uniform(rng);
 
-        unsigned int rectangleNumber = uniform(rng);
-
+		unsigned int rectangleNumber = map_keys[map_key_index];
         Rectangle tempRectangle = tempData[rectangleNumber];
         // create weights for choosing side of rectangle
         std::vector<unsigned int> weights = tempRectangle.getSideLengths();
@@ -95,7 +99,7 @@ void Generator::generateRectanglesFromBox(){
         std::uniform_int_distribution<unsigned int> sideSplitUniform (1, sideLength-1);
         unsigned int splitLength = sideSplitUniform(rng);
 
-        //splitRectangle(tempData[rectangleNumber], sideNumber, splitLength);
+        // split rectangle
         Rectangle rightRectangle = tempRectangle;
         Rectangle leftRectangle = tempRectangle;
 
@@ -105,11 +109,15 @@ void Generator::generateRectanglesFromBox(){
         rightRectangle.modifyStartPoint(sideNumber, tempRectangle.getStartPoint()[sideNumber] + splitLength);
         rightRectangle.modifySideLength(sideNumber, tempRectangle.getSideLengths()[sideNumber] - splitLength);
 
+		//update map
         tempData.erase(rectangleNumber);
 		tempData[maxKey + 1] = leftRectangle;
 		tempData[maxKey + 2] = rightRectangle;
 		maxKey += 2;
     }
+	// update data
+	for (auto const & item : tempData)
+		_data.push_back(item.second);
 }
 
 std::vector<Rectangle> Generator::getGeneratedData()

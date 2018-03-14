@@ -17,7 +17,7 @@ private:
 
 public:
     OptimizationProblem();
-    OptimizationProblem(unsigned int rectangleCount, unsigned int boxLength, unsigned int minSideLength, unsigned int maxSideLength);
+    OptimizationProblem(unsigned int rectangleCount, unsigned int boxLength, unsigned int minSideLength, unsigned int maxSideLength, int generatorType);
     OptimizationProblem(const OptimizationProblem& obj);
     ~OptimizationProblem();
     void solveOptimizationProblem(int choice);
