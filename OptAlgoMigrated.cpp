@@ -45,6 +45,7 @@ void Widget::generateData()
 	ui->logger->insertPlainText(QString::fromStdString(stream.str()));
 	ui->logger->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
 
+	delete problem;
     problem = new OptimizationProblem(rectCount, boxLength, minRectLength, maxRectLength, generatorTypeIndex);
 
     ui->logger->insertPlainText("Instance Generated\n\n");

@@ -14,19 +14,69 @@
    <string>Widget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
+   <item row="1" column="1" rowspan="2">
+    <widget class="QTextEdit" name="logger">
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Welcome to Packing Solver.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Usage:&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1) Generate instances by changing the parameters and pressing Generate Instace button.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2) Choose algorithm to solve the problem and press Solve button&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3) Get the output solution and visualization of steps.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="2" colspan="2">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Box Length</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Rectangles Number</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QSpinBox" name="rectangleNumberSpinBox">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>10000</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QSpinBox" name="boxSizeSpinBox">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Generator Type</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="2" colspan="2">
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>Max Rectangle Length</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="5">
-      <widget class="QPushButton" name="generateButton">
-       <property name="text">
-        <string>Generate Instance</string>
        </property>
       </widget>
      </item>
@@ -40,11 +90,25 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2" colspan="2">
-      <widget class="QLabel" name="label_5">
+     <item row="4" column="0" colspan="5">
+      <widget class="QPushButton" name="generateButton">
        <property name="text">
-        <string>Box Length</string>
+        <string>Generate Instance</string>
        </property>
+      </widget>
+     </item>
+     <item row="2" column="1" colspan="4">
+      <widget class="QComboBox" name="generatorBox">
+       <item>
+        <property name="text">
+         <string>Rectangle Generator</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Box Splitter Generator</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="1" column="0">
@@ -64,99 +128,33 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Rectangles Number</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QSpinBox" name="boxSizeSpinBox">
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>1000</number>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QSpinBox" name="rectangleNumberSpinBox">
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>10000</number>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>Generator Type</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" colspan="4">
-      <widget class="QComboBox" name="generatorBox">
-       <item>
-        <property name="text">
-         <string>Rectangle Generator</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Box Splitter Generator</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="3" column="1" colspan="4">
-      <widget class="QComboBox" name="neighborhoodBox">
-       <item>
-        <property name="text">
-         <string>Geometrical Neighborhood</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Rule-based Neighborhood</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Neighborhood Type</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
-   <item row="1" column="1" rowspan="2">
-    <widget class="QTextEdit" name="logger">
-     <property name="html">
-      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Welcome to Packing Solver.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Usage:&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1) Generate instances by changing the parameters and pressing Generate Instace button.&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2) Choose algorithm to solve the problem and press Solve button&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3) Get the output solution and visualization of steps.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
+   <item row="0" column="0" colspan="2">
+    <widget class="QGraphicsView" name="graphicsView"/>
    </item>
    <item row="2" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
+     <item row="2" column="0" colspan="3">
+      <widget class="QPushButton" name="solveButton">
        <property name="text">
-        <string>Method</string>
+        <string>Solve</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QCheckBox" name="displayWorseCheckBox">
+       <property name="text">
+        <string>Display Worse Solutions</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <property name="tristate">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -179,33 +177,35 @@ p, li { white-space: pre-wrap; }
        </item>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QCheckBox" name="displayWorseCheckBox">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Display Worse Solutions</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-       <property name="tristate">
-        <bool>false</bool>
+        <string>Method</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" colspan="3">
-      <widget class="QPushButton" name="solveButton">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>Solve</string>
+        <string>Neighborhood Type</string>
        </property>
+      </widget>
+     </item>
+     <item row="1" column="1" colspan="2">
+      <widget class="QComboBox" name="neighborhoodBox">
+       <item>
+        <property name="text">
+         <string>Geometrical Neighborhood</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rule-based Neighborhood</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QGraphicsView" name="graphicsView"/>
    </item>
   </layout>
   <zorder>graphicsView</zorder>

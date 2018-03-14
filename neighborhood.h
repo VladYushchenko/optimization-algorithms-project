@@ -31,6 +31,7 @@ class Rectangle{
         void rotate();
         bool canContain(const Rectangle & rectangle);
         bool contains(const Rectangle & rectangle);
+		bool overlaps(const Rectangle & rectangle);
         void moveToPosition(int x, int y);
 
 };
@@ -62,7 +63,7 @@ public:
     bool findPositionToPlaceInBox(Rectangle& rectangle);
     bool splitFreePlace(Rectangle freeRectangle, const Rectangle &candidateRectangle);
     bool isEmpty();
-    void PruneFreeList();
+    void filterFreePlaces();
 };
 
 

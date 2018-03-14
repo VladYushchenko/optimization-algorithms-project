@@ -50,11 +50,22 @@ bool Rectangle::contains(const Rectangle &rectangle)
     // check if overlapping is complete
     if ( this->x <= rectangle.x
          && this->y <= rectangle.y
-         && this->x + this->width >= rectangle.x
-         && this->y + this->width >= rectangle.y)
+         && this->x + this->width >= rectangle.x + rectangle.width
+         && this->y + this->height >= rectangle.y + rectangle.height)
         return true;
     else
         return false;
+}
+
+bool Rectangle::overlaps(const Rectangle & rectangle)
+{
+	if (this->x < rectangle.x + rectangle.width
+	 && this->x + this->width > rectangle.x
+	 && this->y < rectangle.y + rectangle.height
+	 && this->y + this->height > rectangle.y)
+		return true;
+	else
+		return false;
 }
 
 std::vector<unsigned int> Rectangle::getSideLengths(){
@@ -181,11 +192,10 @@ bool Box::moveRectangle(const Rectangle& rect){
                 _freePlaceForRectangles.erase(_freePlaceForRectangles.begin() + i);
                 --i;
                 --numRectanglesToProcess;
-                break;
             }
         }
 
-        PruneFreeList();
+        filterFreePlaces();
         _placedRectanglesArea += positionedRectangle.area;
         _containedRectangles.push_back(positionedRectangle);
         _countRectagles++;
@@ -246,11 +256,8 @@ bool Box::findPositionToPlaceInBox(Rectangle& rectangle)
 bool Box::splitFreePlace(Rectangle freePlace, const Rectangle &candidateRectangle)
 {
     // Check if the rectangles not intersect at all.
-    if (  candidateRectangle.x >= freePlace.x + freePlace.width
-       || candidateRectangle.x + candidateRectangle.width <= freePlace.x
-       || candidateRectangle.y >= freePlace.y + freePlace.height
-       || candidateRectangle.y + candidateRectangle.height <= freePlace.y )
-        return false;
+	if (!freePlace.overlaps(candidateRectangle))
+		return false;
 
     if (candidateRectangle.x < freePlace.x + freePlace.width
             && candidateRectangle.x + candidateRectangle.width > freePlace.x)
@@ -302,7 +309,7 @@ bool Box::isEmpty()
     return _containedRectangles.empty();
 }
 
-void Box::PruneFreeList()
+void Box::filterFreePlaces()
 {
     for(size_t i = 0; i < _freePlaceForRectangles.size(); ++i)
         for(size_t j = i + 1; j < _freePlaceForRectangles.size(); ++j)
@@ -366,7 +373,6 @@ void Neighborhood<T>::calculateGeometricBasedNeighbors(T currentSolution){
     /// Try to place rectangle to box that is not filled
     /// Choose the biggest element possible
     /// and place it in optimal way
-    ///
 
     _neighbors.clear();
     // sort boxes by load
