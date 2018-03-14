@@ -1,4 +1,6 @@
 #include "generator.h"
+#include <map>
+#include <algorithm>
 
 
 // Generator implementation
@@ -9,11 +11,13 @@ Generator::Generator(){
     _upperBound = 0;
 }
 
-Generator::Generator(const unsigned int instanceNumber, const unsigned int lowerLengthLimit,
-                     const unsigned int upperLengthLimit, const unsigned int dim){
+Generator::Generator(const unsigned int instanceNumber, const unsigned int boxLength, 
+	const unsigned int lowerLengthLimit, const unsigned int upperLengthLimit, const unsigned int dim){
 
     _instanceNumber = instanceNumber;
     _dim = dim;
+	_boxLength = boxLength;
+
     if (lowerLengthLimit < upperLengthLimit){
     _lowerBound = lowerLengthLimit;
     _upperBound = upperLengthLimit;
@@ -29,28 +33,42 @@ Generator::~Generator(){
 
 }
 
-void Generator::generateData(){
-    /*if (!std::is_unsigned<size_t>::value)
-        throw std::runtime_error("Wrong generator type. Should be unsigned");
-    else{*/
-        std::random_device rd;
-        // seed generator
-        std::mt19937 rng(rd());
-        std::uniform_int_distribution<unsigned int> uniform(_lowerBound, _upperBound);
+void Generator::generateData(int option)
+{
+	switch (option)
+	{
+	case 1:
+		generateRectangles();
+		break;
+	case 2:
+		generateRectanglesFromBox();
+		break;
+	default:
+		generateRectangles();
+		break;
+	}
+}
 
-        for (size_t id = 0; id < _instanceNumber; id++) {
-            //create 1 rectangle and push it to data
-            Rectangle tempRectangle(id, uniform(rng), uniform(rng));
-            _data.push_back(tempRectangle);
-        }
+void Generator::generateRectangles()
+{
+    std::random_device rd;
+    // seed generator
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<unsigned int> uniform(_lowerBound, _upperBound);
 
+    for (size_t id = 0; id < _instanceNumber; id++) {
+        //create rectangle and push it to data
+        Rectangle tempRectangle(id, uniform(rng), uniform(rng));
+        _data.push_back(tempRectangle);
+    }
 }
 
 
-void Generator::generateData2(unsigned int boxLength){
-    std::vector<Rectangle> tempData = std::vector<Rectangle>(1, Rectangle(0, boxLength, boxLength));
+void Generator::generateRectanglesFromBox(){
+	std::map<unsigned int, Rectangle> tempData = { { 1u, Rectangle(0, _boxLength, _boxLength) } };
+	unsigned int maxKey = 1;
+	// seed generator
     std::random_device rd;
-    // seed generator
     std::mt19937 rng(rd());
 
     for (size_t i = 0; i < _instanceNumber; i++){
@@ -81,15 +99,16 @@ void Generator::generateData2(unsigned int boxLength){
         Rectangle rightRectangle = tempRectangle;
         Rectangle leftRectangle = tempRectangle;
 
-        // for one rectangle start point (upper left corner) stays same
-        // modify length only
+        // left rectangle -> origin (upper left corner) stays same, modify length only
         leftRectangle.modifySideLength(sideNumber, splitLength);
-        // change start point and length
+        // modify right
         rightRectangle.modifyStartPoint(sideNumber, tempRectangle.getStartPoint()[sideNumber] + splitLength);
         rightRectangle.modifySideLength(sideNumber, tempRectangle.getSideLengths()[sideNumber] - splitLength);
 
-        tempData.erase(tempData.begin() + rectangleNumber);
-        tempData.insert(tempData.end(), {leftRectangle, rightRectangle});
+        tempData.erase(rectangleNumber);
+		tempData[maxKey + 1] = leftRectangle;
+		tempData[maxKey + 2] = rightRectangle;
+		maxKey += 2;
     }
 }
 

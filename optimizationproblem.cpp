@@ -11,7 +11,7 @@ OptimizationProblem::OptimizationProblem(unsigned int rectangleCount, unsigned i
     _minSideLength = minSideLength;
     _maxSideLength = maxSideLength;
 
-    Generator gen(_rectangleCount, _minSideLength, _maxSideLength);
+    Generator gen(_rectangleCount, _boxLength, _minSideLength, _maxSideLength);
     gen.generateData();
     std::vector<Rectangle> rects = gen.getGeneratedData();
 

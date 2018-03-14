@@ -71,7 +71,6 @@ std::list<T> LocalSearchSolver<T>::solve(){
             isOptimumFound = true;
     }
     _solution = currentSolution;
-    std::cout << "Drawing3..." << std::endl;
     return solutionHistory;
 
 }
