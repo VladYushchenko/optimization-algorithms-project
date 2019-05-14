@@ -19,16 +19,17 @@ You need to have `Qt5` library and `qmake` installed on your machine, which incl
 
 For more detailed instruction on Qt5 installation please see [this link](https://www.qt.io/download).
 
+Additionally, you need C++ compiler with -std=c++11 support.
+
 ## Usage
 ### Linux
-Create the build and create 
+Create the build directory and makefile and execute following commands: 
 
 ```
 mkdir build
 cd ./build 
 qmake -makefile ../Opt.pro
 ```
-This creates the makefile from the corresponding project file. 
 
 Then use `make` command to create executable named *Opt*.
 
